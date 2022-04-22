@@ -30,18 +30,18 @@ void loop()
     {
         inrijSensor.debounce() ;                                                // read and debounce sensor every 500ms
         uitrijSensor.debounce() ;                                               // read and debounce sensor every 500ms
+
     } END_REPEAT
     
-    byte sensorState = sensor.getState() ;
 
-    if( inrijSensor == FALLING )                                                // inrij sensor gemaakt -> sein = safe
+    if( inrijSensor.getState() == FALLING )                                     // inrij sensor gemaakt -> sein = safe
     {
         digitalWrite( relayPin, LOW ) ;         
     }
 
-    if( uitrijSensor == RISING )                                                // inrij sensor verbroken -> sein = danger
+    if( uitrijSensor.getState() == RISING )                                     // inrij sensor verbroken -> sein = danger
     {
-        // delay( 5000 ) ;                                                      // je kan hier bij het afvallen van het uitrijsensor een vertraging toevoegen voordat het relais schakelt
+        // delay( 5000 ) ;                                                      // je kan hier bij het afvallen van het uitrijsensor een vertraging in milliseconde toevoegen voordat het relais schakelt
         digitalWrite( relayPin, HIGH ) ;
     }
 }
